@@ -1,0 +1,59 @@
+<!--для себе те що робила на практиці-->
+db.users.find()
+
+db.users.find({age:{$lt:20}})
+db.users.find({age:{$gt:20}})
+
+db.users.find(
+{
+$or:[{parents:'Tamara'},
+{parents:'Petro'}]
+}
+)
+
+db.users.find(
+{studying:{$in:['js']}}
+)
+
+
+db.users.updateMany(
+{studying:{$size:1}},
+{$set:{'studying.$[]':'java'}})
+
+db.users.find(
+{studying:{$size:1}}
+)
+
+db.users.find({
+
+$and:[
+{house:{$lte:20}},
+{house:{$gte:1}}
+]
+}
+)
+
+db.users.find({
+$and: [
+{"address.house": {$gt: 1}},
+{"address.house": {$lte: 20}}
+]
+})
+
+
+db.users.find()
+db.users.find({"address.street": /^.*\s.*/})
+
+db.users.find().sort({
+"address.flat":1, rating:1})
+
+db.users.find({
+parents:/^.*na$/i
+})
+
+db.users.find({studying:{$nin: ['python']}})
+db.users.updateMany({studying:{$nin: ['python']}},
+{$push: {studying:'python'}})
+
+
+db.users.deleteMany({studying: {$exists:0}})
